@@ -1,4 +1,5 @@
 const execa = require("execa");
+const rimraf = require("rimraf");
   const fs = require("fs");
 
   (async () => {
@@ -12,7 +13,7 @@ const execa = require("execa");
       await execa("git", ["--work-tree", folderName, "commit", "-m", "gh-pages"]);
       console.log("Pushing to gh-pages...");
       await execa("git", ["push", "origin", "HEAD:gh-pages", "--force"]);
-      await execa("rm", ["-r", folderName]);
+      await rimraf(folderName, { glob: false });
       await execa("git", ["checkout", "-f", "master"]);
       await execa("git", ["branch", "-D", "gh-pages"]);
       console.log("Successfully deployed");
