@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1> Refining component</h1>
+        <h3> </h3>
     </div>
 </template>
 

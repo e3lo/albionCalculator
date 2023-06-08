@@ -16,6 +16,22 @@ const routes = [
         component: () =>
             import("../views/CookingPage.vue")
     },
+    {
+        path: "/refining",
+        name: "RefiningPage",
+        // something comment
+
+        component: () =>
+            import("../views/RefiningPage.vue")
+    },
+    {
+        path: "/brewing",
+        name: "BrewingPage",
+        // something comment
+
+        component: () =>
+            import("../views/BrewingPage.vue")
+    },
 ];
 
 const router = createRouter({
