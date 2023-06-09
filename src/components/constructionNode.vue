@@ -1,6 +1,8 @@
 <template>
     <div id="construction-block">
         <h3> {{ title }} </h3>
+        <p> {{ price }}</p>
+        <p> {{ quantity }}</p>
     </div>
 </template>
 
@@ -9,7 +11,8 @@
 
     defineProps({
         title: String,
-        price: Number
+        price: Number,
+        quantity: Number
     })
 </script>
 
