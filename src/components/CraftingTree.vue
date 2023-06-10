@@ -22,29 +22,39 @@
         itemValue : Number,
         craftingCost : Number,
         sellPrice : Number,
+        premium : Boolean,
+        focus : Boolean,
         recipe : Array,
     })
 
     // Calculate profits
-    const albionTax = 0.04
-    let baseCraftingCost = 0
+    let albionTax = computed(() => {
+        return props.premium ? 0.04 : 0.08
+    }) 
 
-    for (let item of props.recipe) {
-            baseCraftingCost += item['price'] * item['quantity']
-    }
+    let baseCraftingCost = computed(() => {
+        let cost = 0
+        for (let item of props.recipe) {
+            cost += item['price'] * item['quantity']
+        }
 
-    let craftingStationCost = props.itemValue * 0.1125 * (props.craftingCost / 100)
+        return cost
+    })
+
+    let craftingStationCost = computed(() => {
+        return props.itemValue * 0.1125 * (props.craftingCost / 100)
+    })
 
     let totalCost = computed(() => {
-        return baseCraftingCost + craftingStationCost
+        return baseCraftingCost.value + craftingStationCost.value
     })
 
     let grossSales = computed(() => {
-        (props.sellPrice * (1 - albionTax)) * 10
+        return (props.sellPrice * (1 - albionTax.value)) * 10
     })
 
     let profit = computed(() => {
-        return (props.sellPrice * (1 - albionTax)) * 10 - baseCraftingCost + craftingStationCost
+        return (props.sellPrice * (1 - albionTax.value)) * 10 - baseCraftingCost.value + craftingStationCost.value
     })
 
 </script>
