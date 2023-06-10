@@ -5,6 +5,18 @@
         <label for="focus-toggle">Focus</label>
         <input type="checkbox" id="premium-toggle" v-model="premiumToggle">
         <label for="premium-toggle">Premium</label>
+        <input type="checkbox" id="east-server" v-model="eastServer">
+        <label for="east-server">East Server</label>
+
+        <select v-model="cityLocation">
+            <option>Caerleon</option>
+            <option>Martlock</option>
+            <option>Thetford</option>
+            <option>Fort Sterling</option>
+            <option>Lymhurst</option>
+            <option>Bridgewatch</option>
+        </select>
+
         <button @click="refreshValues()">Refresh values</button>
     </div>
     <div>
@@ -17,17 +29,32 @@
     import { computed } from '@vue/reactivity';
     import { reactive, ref } from 'vue';
 
-    // Setting up Premium and Focus Toggles
+    // Setting up user input values
     const premiumToggle = ref(false)
     const focusToggle = ref(false)
+    const eastServer = ref(true)
+    const cityLocation = ref('')
 
     // Fetch price API [To develop]
     async function refreshValues() {
-        console.log(buyingList)
-        console.log(sellingList)
+        if (!cityLocation.value) {
+            return (alert("Please enter a city first"))
+        }
+
+        let url = eastServer.value ? 'https://east.albion-online-data.com/api/v2/stats/prices/' : 'https://west.albion-online-data.com/api/v2/stats/prices/'
+        let buyUrl = `${url}${buyingList.value.toString()}.json?locations=${cityLocation.value}`
+        let sellUrl = `${url}${sellingList.value.toString()}.json?locations=${cityLocation.value}`
+
+        console.log(buyUrl)
         try {
-            //let response = await fetch('url')
-            console.log("getting values")
+            let buyResponse = await fetch(buyUrl)
+            let sellResponse = await fetch(sellUrl)
+
+            buyResponse = await buyResponse.json()
+            sellResponse = await sellResponse.json()
+
+            console.log(buyResponse)
+            console.log(sellResponse)
         } catch(error) {
             console.error(`Error: ${error}`)
         }
