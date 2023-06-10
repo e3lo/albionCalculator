@@ -4,7 +4,9 @@
             <ConstructionNode v-for="item of props.recipe" :key="props.recipe.indexOf(item)" :title="item['title']" :price="item['price']" :quantity="item['quantity']"></ConstructionNode>
         </div>
         <div id="crafting-row__results">
-            Total Cost : {{ totalCost }}
+            Total Cost : {{ totalCost }} <br/>
+            Total Sales : {{ grossSales }} <br/>
+            Profit : {{ profit }} <br/>
         </div>
     </div>
 
@@ -19,13 +21,14 @@
         title : String,
         itemValue : Number,
         craftingCost : Number,
+        sellPrice : Number,
         recipe : Array,
     })
 
     // Calculate profits
-    // const albionTax = [0.08, 0.04]
+    const albionTax = 0.04
     let baseCraftingCost = 0
-    
+
     for (let item of props.recipe) {
             baseCraftingCost += item['price'] * item['quantity']
     }
@@ -34,6 +37,14 @@
 
     let totalCost = computed(() => {
         return baseCraftingCost + craftingStationCost
+    })
+
+    let grossSales = computed(() => {
+        (props.sellPrice * (1 - albionTax)) * 10
+    })
+
+    let profit = computed(() => {
+        return (props.sellPrice * (1 - albionTax)) * 10 - baseCraftingCost + craftingStationCost
     })
 
 </script>

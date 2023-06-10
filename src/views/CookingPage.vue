@@ -3,7 +3,13 @@
         <h1> Cooking component</h1>
     </div>
     <div>
-        <CraftingTree title="Beef Stew" :item-value="1060" :crafting-cost="300" :recipe="beefStew"/>
+        <CraftingTree 
+            :title="beefStew['title']" 
+            :itemValue="beefStew['itemValue']"
+            :craftingCost="beefStew['craftingCost']" 
+            :sellPrice="beefStew['sellPrice']" 
+            :recipe="beefStew['recipe']"
+        />
     </div>
 </template>
 
@@ -13,21 +19,29 @@
     // Fetch price API [To develop]
 
     // Recipes
-    const beefStew = [
+    const beefStew = {
+        'title' : "Beef Stew",
+        'itemValue' : 1060,
+        'craftingCost' : 300,
+        'sellPrice' : 5600,
+
+        'recipe' : [
         {
             'title' : "RawBeef",
-            'price' : "300",
-            'quantity' : "72",
+            'price' : 300,
+            'quantity' : 72,
         },
         {
             'title' : "Corn",
-            'price' : "400",
-            'quantity' : "36",
+            'price' : 400,
+            'quantity' : 36,
         },
         {
             'title' : "Goose Eggs",
-            'price' : "344",
-            'quantity' : "16",
-        },
-    ]
+            'price' : 344,
+            'quantity' : 16,
+        }],    
+    }
+    
+
 </script>
