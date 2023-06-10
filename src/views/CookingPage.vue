@@ -5,12 +5,10 @@
         <label for="focus-toggle">Focus</label>
         <input type="checkbox" id="premium-toggle" v-model="premiumToggle">
         <label for="premium-toggle">Premium</label>
-        
+        <button @click="refreshValues()">Refresh values</button>
     </div>
     <div>
-        <CraftingTree 
-            v-bind="beefStew"
-        /> <!-- Need to simplify this down -->
+        <CraftingTree v-for="item of activeRecipes" :key="activeRecipes.indexOf(item)" v-bind="item"/>
     </div>
 </template>
 
@@ -23,6 +21,22 @@
     const focusToggle = ref(false)
 
     // Fetch price API [To develop]
+    /* async function refreshValues() {
+
+        let shoppingList = createShoppingList()
+
+        try {
+            let response = await fetch('url')
+            console.log("getting values")
+        } catch(error) {
+            console.error(`Error: ${error}`)
+        }
+    } */
+
+    // Creating list of items to be requested in API
+    /* function createShoppingList() {
+
+    } */
 
     // Recipes
     const beefStew = reactive({
@@ -40,6 +54,32 @@
             'quantity' : 72,
         },
         {
+            'title' : "Pumpkin",
+            'price' : 400,
+            'quantity' : 36,
+        },
+        {
+            'title' : "Bread",
+            'price' : 344,
+            'quantity' : 16,
+        }],    
+    })
+
+    const porkOmelette = reactive({
+        'title' : "Pork Omelette",
+        'itemValue' : 1060,
+        'craftingCost' : 300,
+        'sellPrice' : 5400,
+        'premium' : premiumToggle,
+        'focus' : focusToggle,
+
+        'recipe' : [
+        {
+            'title' : "Raw Pork",
+            'price' : 300,
+            'quantity' : 72,
+        },
+        {
             'title' : "Corn",
             'price' : 400,
             'quantity' : 36,
@@ -50,6 +90,8 @@
             'quantity' : 16,
         }],    
     })
-    
+
+    // Setting up list of active recipies
+    const activeRecipes = ref([beefStew, porkOmelette])
 
 </script>
