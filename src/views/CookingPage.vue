@@ -20,7 +20,7 @@
         <button @click="refreshValues()">Refresh values</button>
     </div>
     <div>
-        <CraftingTree v-for="item of activeRecipes" :key="activeRecipes.indexOf(item)" v-bind="item"/>
+        <CraftingTree v-for="[key, value] of Object.entries(activeRecipes)" :key="key" v-bind="value"/>
     </div>
 </template>
 
@@ -45,13 +45,22 @@
         let buyUrl = `${url}${buyingList.value.toString()}.json?locations=${cityLocation.value}`
         let sellUrl = `${url}${sellingList.value.toString()}.json?locations=${cityLocation.value}`
 
-        console.log(buyUrl)
         try {
             let buyResponse = await fetch(buyUrl)
             let sellResponse = await fetch(sellUrl)
 
             buyResponse = await buyResponse.json()
             sellResponse = await sellResponse.json()
+            
+            console.log(sellResponse[0].item_id)
+            console.log(activeRecipes.value.indexOf(JSON.parse(sellResponse[0].item_id)))
+
+            for (let i = 0; i < sellResponse.length; i++){
+                if (sellResponse[i].item_id == activeRecipes.value[i][`internalName`]) {
+                    console.log("true")
+                    activeRecipes.value[i][`sellPrice`] = sellResponse.i.sell_price_min
+                }
+            }
 
             console.log(buyResponse)
             console.log(sellResponse)
@@ -64,7 +73,7 @@
     const buyingList = computed(() => {
         let list = []
 
-        for (let items of activeRecipes.value) {
+        for (let items of Object.values(activeRecipes.value)) {
             for (let components of items['recipe']) {
                 list.push(components['internalName'])
             }
@@ -86,7 +95,7 @@
     })
 
     // Recipes
-    const beefStew = reactive({
+    const T8_MEAL_STEW = reactive({
         'title' : "Beef Stew",
         'internalName' : 'T8_MEAL_STEW',
         'itemValue' : 1060,
@@ -116,7 +125,7 @@
         }],    
     })
 
-    const porkOmelette = reactive({
+    const T7_MEAL_OMELETTE = reactive({
         'title' : "Pork Omelette",
         'internalName' : 'T7_MEAL_OMELETTE',
         'itemValue' : 1060,
@@ -147,6 +156,9 @@
     })
 
     // Setting up list of active recipies
-    const activeRecipes = ref([beefStew, porkOmelette])
+    const activeRecipes = ref({
+        'T8_MEAL_STEW' : T8_MEAL_STEW,
+        'T7_MEAL_OMELETTE' : T7_MEAL_OMELETTE,
+    })
 
 </script>
