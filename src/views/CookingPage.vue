@@ -51,19 +51,13 @@
 
             buyResponse = await buyResponse.json()
             sellResponse = await sellResponse.json()
-            
-            console.log(sellResponse[0].item_id)
-            console.log(activeRecipes.value.indexOf(JSON.parse(sellResponse[0].item_id)))
 
-            for (let i = 0; i < sellResponse.length; i++){
-                if (sellResponse[i].item_id == activeRecipes.value[i][`internalName`]) {
-                    console.log("true")
-                    activeRecipes.value[i][`sellPrice`] = sellResponse.i.sell_price_min
-                }
+            for await (let item of sellResponse){
+                activeRecipes.value[item.item_id]['sellPrice'] = item.sell_price_min
             }
 
             console.log(buyResponse)
-            console.log(sellResponse)
+
         } catch(error) {
             console.error(`Error: ${error}`)
         }
@@ -87,7 +81,7 @@
     const sellingList = computed(() => {
         let list = []
 
-        for (let items of activeRecipes.value) {
+        for (let items of Object.values(activeRecipes.value)) {
             list.push(items['internalName'])
         }
 
