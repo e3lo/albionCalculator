@@ -20,14 +20,15 @@
         <button @click="refreshValues()">Refresh values</button>
     </div>
     <div>
-        <CraftingTree v-for="[key, value] of Object.entries(activeRecipes)" :key="key" v-bind="value"/>
+        <CraftingTree v-for="[key, value] of Object.entries(activeRecipes)" :key="key" v-bind="value" :premium="premiumToggle" :focus="focusToggle"/>
     </div>
 </template>
 
 <script setup>
     import CraftingTree from '@/components/CraftingTree.vue';
     import { computed } from '@vue/reactivity';
-    import { reactive, ref } from 'vue';
+    import { ref } from 'vue';
+    import * as recipe from '@/recipes/cookingRecipes';
 
     // Setting up user input values
     const premiumToggle = ref(false)
@@ -88,71 +89,10 @@
         return list
     })
 
-    // Recipes
-    const T8_MEAL_STEW = reactive({
-        'title' : "Beef Stew",
-        'internalName' : 'T8_MEAL_STEW',
-        'itemValue' : 1060,
-        'craftingCost' : 300,
-        'sellPrice' : 5600,
-        'premium' : premiumToggle,
-        'focus' : focusToggle,
-
-        'recipe' : [
-        {
-            'title' : "Raw beef",
-            'internalName' : 'T8_MEAT',
-            'price' : 300,
-            'quantity' : 72,
-        },
-        {
-            'title' : "Pumpkin",
-            'internalName' : 'T8_PUMPKIN',
-            'price' : 400,
-            'quantity' : 36,
-        },
-        {
-            'title' : "Bread",
-            'internalName' : 'T4_BREAD',
-            'price' : 344,
-            'quantity' : 16,
-        }],    
-    })
-
-    const T7_MEAL_OMELETTE = reactive({
-        'title' : "Pork Omelette",
-        'internalName' : 'T7_MEAL_OMELETTE',
-        'itemValue' : 1060,
-        'craftingCost' : 300,
-        'sellPrice' : 5400,
-        'premium' : premiumToggle,
-        'focus' : focusToggle,
-
-        'recipe' : [
-        {
-            'title' : "Raw Pork",
-            'internalName' : 'T7_MEAT',
-            'price' : 300,
-            'quantity' : 72,
-        },
-        {
-            'title' : "Corn",
-            'internalName' : 'T7_CORN',
-            'price' : 400,
-            'quantity' : 36,
-        },
-        {
-            'title' : "Goose Eggs",
-            'internalName' : 'T5_EGG',
-            'price' : 344,
-            'quantity' : 16,
-        }],    
-    })
-
     // Setting up list of active recipies
     const activeRecipes = ref({
-        'T8_MEAL_STEW' : T8_MEAL_STEW,
-        'T7_MEAL_OMELETTE' : T7_MEAL_OMELETTE,
+        'T8_MEAL_STEW' : recipe.T8_MEAL_STEW,
+        'T7_MEAL_OMELETTE' : recipe.T7_MEAL_OMELETTE,
     })
 
 </script>
