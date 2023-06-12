@@ -46,15 +46,15 @@
     })
 
     let totalCost = computed(() => {
-        return baseCraftingCost.value + craftingStationCost.value
+        return Math.round(baseCraftingCost.value + craftingStationCost.value)
     })
 
     let grossSales = computed(() => {
-        return (props.sellPrice * (1 - albionTax.value)) * 10
+        return Math.round((props.sellPrice * (1 - albionTax.value)) * 10)
     })
 
     let profit = computed(() => {
-        return (props.sellPrice * (1 - albionTax.value)) * 10 - baseCraftingCost.value + craftingStationCost.value
+        return Math.round(grossSales.value - totalCost.value)
     })
 
 </script>
