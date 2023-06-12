@@ -69,21 +69,20 @@
         let list = []
 
         for (let items of Object.values(activeRecipes.value)) {
-            for (let components of items['recipe']) {
-                list.push(components['internalName'])
+            for (let components in items['recipe']) {
+                list.push(components)
             }
         }
 
-        let uniqueList = [...new Set(list)]
+        let uniqueList = [...new Set(list)] // Removes duplicate entries
 
         return uniqueList
     })
 
     const sellingList = computed(() => {
         let list = []
-
-        for (let items of Object.values(activeRecipes.value)) {
-            list.push(items['internalName'])
+        for (let items in activeRecipes.value) {
+            list.push(items)
         }
 
         return list

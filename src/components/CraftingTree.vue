@@ -1,7 +1,7 @@
 <template>
     <div id="crafting-row">
         <div id="crafting-row__materials">
-            <ConstructionNode v-for="item of props.recipe" :key="props.recipe.indexOf(item)" :title="item['title']" :price="item['price']" :quantity="item['quantity']"></ConstructionNode>
+            <ConstructionNode v-for="[key, value] of Object.entries(props.recipe)" :key="key" :title="key" :price="value['price']" :quantity="value['quantity']"></ConstructionNode>
         </div>
         <div id="crafting-row__results">
             Total Cost : {{ totalCost }} <br/>
@@ -24,7 +24,7 @@
         sellPrice : Number,
         premium : Boolean,
         focus : Boolean,
-        recipe : Array,
+        recipe : Object,
     })
 
     // Calculate profits
@@ -34,8 +34,8 @@
 
     let baseCraftingCost = computed(() => {
         let cost = 0
-        for (let item of props.recipe) {
-            cost += item['price'] * item['quantity']
+        for (let item in props.recipe) {
+            cost += props.recipe[item]['price'] * props.recipe[item]['quantity']
         }
 
         return cost
