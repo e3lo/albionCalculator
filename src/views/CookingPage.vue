@@ -17,7 +17,7 @@
             <option>Bridgewatch</option>
         </select>
 
-        <button @click="refreshValues()">Refresh values</button>
+        <button @click="refreshValues()" :disabled="fetchingAPI" >Refresh values</button>
     </div>
     <div>
         <CraftingTree v-for="[key, value] of Object.entries(activeRecipes)" :key="key" v-bind="value" :premium="premiumToggle" :focus="focusToggle" :resourceReturn="resourceReturn"/>
@@ -34,6 +34,7 @@
     const premiumToggle = ref(false)
     const focusToggle = ref(false)
     const eastServer = ref(true)
+    const fetchingAPI = ref(false)
     const cityLocation = ref('')
 
     // Calculating resource return rate
@@ -60,6 +61,7 @@
 
     // Fetch price API [To develop]
     async function refreshValues() {
+        fetchingAPI.value = true
         if (!cityLocation.value) {
             return (alert("Please enter a city first"))
         }
@@ -99,8 +101,10 @@
             }
 
             console.log("Done")
+            fetchingAPI.value = false
         } catch(error) {
             console.error(`Error: ${error}`)
+            fetchingAPI.value = false
         }
     }
 
