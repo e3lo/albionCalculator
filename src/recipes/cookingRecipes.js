@@ -2,6 +2,8 @@
 
 import { reactive } from "vue"
 
+const bonusCity = "Caerleon"
+
 const T8_MEAL_STEW = reactive({
     'title' : "Beef Stew",
     'internalName' : 'T8_MEAL_STEW',
@@ -48,4 +50,4 @@ const T7_MEAL_OMELETTE = reactive({
     }  
 })
 
-export { T8_MEAL_STEW, T7_MEAL_OMELETTE }
+export { bonusCity, T8_MEAL_STEW, T7_MEAL_OMELETTE }

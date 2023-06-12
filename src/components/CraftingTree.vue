@@ -25,6 +25,7 @@
         premium : Boolean,
         focus : Boolean,
         recipe : Object,
+        resourceReturn : Number,
     })
 
     // Calculate profits
@@ -50,7 +51,7 @@
     })
 
     let grossSales = computed(() => {
-        return Math.round((props.sellPrice * (1 - albionTax.value)) * 10)
+        return Math.round((props.sellPrice * (1 - albionTax.value)) * 10 * (1 + props.resourceReturn))
     })
 
     let profit = computed(() => {

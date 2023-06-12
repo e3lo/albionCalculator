@@ -20,7 +20,7 @@
         <button @click="refreshValues()">Refresh values</button>
     </div>
     <div>
-        <CraftingTree v-for="[key, value] of Object.entries(activeRecipes)" :key="key" v-bind="value" :premium="premiumToggle" :focus="focusToggle"/>
+        <CraftingTree v-for="[key, value] of Object.entries(activeRecipes)" :key="key" v-bind="value" :premium="premiumToggle" :focus="focusToggle" :resourceReturn="resourceReturn"/>
     </div>
 </template>
 
@@ -35,6 +35,28 @@
     const focusToggle = ref(false)
     const eastServer = ref(true)
     const cityLocation = ref('')
+
+    // Calculating resource return rate
+    const resourceReturn = computed(() => {
+        let returnRate = 0
+
+        if (cityLocation.value == recipe.bonusCity) {
+            if (focusToggle.value) {
+                returnRate = 0.479
+            } else {
+                returnRate = 24.8
+            }
+        } else {
+            if (focusToggle.value) {
+                returnRate = 0.435
+            } else {
+                returnRate = 0.152
+            }
+        }
+
+        return returnRate
+    })
+
 
     // Fetch price API [To develop]
     async function refreshValues() {
@@ -59,6 +81,7 @@
             }), {}) 
 
             console.log(buyPriceObject)
+            console.log(sellResponse)
 
             for await (let item of sellResponse){
                 let currentRecipeProduct = activeRecipes.value[item.item_id]
