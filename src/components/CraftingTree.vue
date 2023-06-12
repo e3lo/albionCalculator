@@ -7,6 +7,7 @@
             Total Cost : {{ totalCost }} <br/>
             Total Sales : {{ grossSales }} <br/>
             Profit : {{ profit }} <br/>
+            Last Updated : {{ updateTime }} Hrs
         </div>
     </div>
 
@@ -27,6 +28,15 @@
         recipe : Object,
         resourceReturn : Number,
         time : String,
+    })
+
+    // Time delay
+    const updateTime = computed(() => {
+        let updateDate = new Date(props.time)
+        let currentTime = new Date()
+
+        let timeDifference = currentTime - updateDate // In ms
+        return Math.round((timeDifference)/(1000*3600))
     })
 
     // Calculate profits
