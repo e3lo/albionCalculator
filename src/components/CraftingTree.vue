@@ -1,7 +1,7 @@
 <template>
     <div id="crafting-row">
         <div id="crafting-row__materials">
-            <ConstructionNode v-for="[key, value] of Object.entries(props.recipe)" :key="key" :title="key" :price="value['price']" :quantity="value['quantity']"></ConstructionNode>
+            <ConstructionNode v-for="[key, value] of Object.entries(props.recipe)" :key="key" v-bind="value" :title="key"></ConstructionNode>
         </div>
         <div id="crafting-row__results">
             Total Cost : {{ totalCost }} <br/>
@@ -26,6 +26,7 @@
         focus : Boolean,
         recipe : Object,
         resourceReturn : Number,
+        time : String,
     })
 
     // Calculate profits

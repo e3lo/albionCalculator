@@ -68,6 +68,7 @@
         let buyUrl = `${url}${buyingList.value.toString()}.json?locations=${cityLocation.value}`
         let sellUrl = `${url}${sellingList.value.toString()}.json?locations=${cityLocation.value}`
 
+        console.log(buyUrl)
         try {
             let buyResponse = await fetch(buyUrl)
             let sellResponse = await fetch(sellUrl)
@@ -77,7 +78,10 @@
 
             // Converts sellResponse into an object with key value pairs
             let buyPriceObject = buyResponse.reduce((acc, cur) => ({
-                ...acc, [cur.item_id] : cur.sell_price_min
+                ...acc, [cur.item_id] : {
+                    'price' : cur.sell_price_min,
+                    'time' : cur.sell_price_min_date,
+                }
             }), {}) 
 
             console.log(buyPriceObject)
@@ -86,12 +90,15 @@
             for await (let item of sellResponse){
                 let currentRecipeProduct = activeRecipes.value[item.item_id]
                 currentRecipeProduct['sellPrice'] = item.sell_price_min
+                currentRecipeProduct['time'] = item.sell_price_min_date
 
                 for (let material in currentRecipeProduct['recipe']) {
-                    currentRecipeProduct['recipe'][material]['price'] = buyPriceObject[material]
+                    currentRecipeProduct['recipe'][material]['price'] = buyPriceObject[material]['price']
+                    currentRecipeProduct['recipe'][material]['time'] = buyPriceObject[material]['time']
                 }
             }
 
+            console.log("Done")
         } catch(error) {
             console.error(`Error: ${error}`)
         }
