@@ -20,7 +20,14 @@
         <button @click="refreshValues()" :disabled="fetchingAPI" >Refresh values</button>
     </div>
     <div>
-        <CraftingTree v-for="[key, value] of Object.entries(activeRecipes)" :key="key" v-bind="value" :premium="premiumToggle" :focus="focusToggle" :resourceReturn="resourceReturn"/>
+        <CraftingTree v-for="[key, value] of Object.entries(activeRecipes)" 
+            :key="key" 
+            v-bind="value" 
+            :premium="premiumToggle" 
+            :focus="focusToggle" 
+            :resourceReturn="resourceReturn"
+            @removeRecipe="removeRecipe"
+        />
     </div>
 </template>
 
@@ -31,7 +38,7 @@
     import * as recipe from '@/recipes/cookingRecipes';
 
     // Setting up list of active recipies
-        const activeRecipes = ref({
+    const activeRecipes = ref({
         'T8_MEAL_STEW' : recipe.T8_MEAL_STEW,
         'T7_MEAL_OMELETTE' : recipe.T7_MEAL_OMELETTE,
     })
@@ -42,6 +49,12 @@
     const eastServer = ref(true)
     const fetchingAPI = ref(false)
     const cityLocation = ref('')
+
+    // Removing active recipes
+    function removeRecipe(item) {
+        console.log(item)
+        delete activeRecipes.value[item]
+    }
 
     // Calculating resource return rate
     const resourceReturn = computed(() => {

@@ -9,6 +9,9 @@
             Profit : {{ profit }} <br/>
             Last Updated : {{ updateTime }} Hrs
         </div>
+        <div>
+            <button @click="$emit('removeRecipe', props.internalName)">Remove</button>
+        </div>
     </div>
 
 </template>
@@ -20,6 +23,7 @@
 
     const props = defineProps({
         title : String,
+        internalName : String,
         itemValue : Number,
         craftingCost : Number,
         sellPrice : Number,
