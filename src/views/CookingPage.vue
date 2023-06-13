@@ -1,6 +1,14 @@
 <template>
     <div>
         <h1> Cooking component</h1>
+        
+        <!-- Recipe Selector -->
+        <div>
+            <li v-for="items in recipe" :key="items.internalName">
+                <button @click="addRecipe(items)"> {{ items.internalName }}</button>
+            </li>
+        </div>
+
         <input type="checkbox" id="focus-toggle" v-model="focusToggle">
         <label for="focus-toggle">Focus</label>
         <input type="checkbox" id="premium-toggle" v-model="premiumToggle">
@@ -37,6 +45,9 @@
     import { ref } from 'vue';
     import * as recipe from '@/recipes/cookingRecipes';
 
+    // Bonus City
+    const bonusCity = "Caerleon"
+
     // Setting up list of active recipies
     const activeRecipes = ref({
         'T8_MEAL_STEW' : recipe.T8_MEAL_STEW,
@@ -56,11 +67,16 @@
         delete activeRecipes.value[item]
     }
 
+    // Adding recipes
+    function addRecipe(item) {
+        activeRecipes.value[item.internalName] = item
+    }
+
     // Calculating resource return rate
     const resourceReturn = computed(() => {
         let returnRate = 0
 
-        if (cityLocation.value == recipe.bonusCity) {
+        if (cityLocation.value == bonusCity) {
             if (focusToggle.value) {
                 returnRate = 0.479
             } else {

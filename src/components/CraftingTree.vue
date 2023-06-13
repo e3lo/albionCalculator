@@ -13,7 +13,6 @@
             <button @click="$emit('removeRecipe', props.internalName)">Remove</button>
         </div>
     </div>
-
 </template>
 
 <script setup>
