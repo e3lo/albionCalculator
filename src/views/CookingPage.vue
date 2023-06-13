@@ -30,6 +30,12 @@
     import { ref } from 'vue';
     import * as recipe from '@/recipes/cookingRecipes';
 
+    // Setting up list of active recipies
+        const activeRecipes = ref({
+        'T8_MEAL_STEW' : recipe.T8_MEAL_STEW,
+        'T7_MEAL_OMELETTE' : recipe.T7_MEAL_OMELETTE,
+    })
+
     // Setting up user input values
     const premiumToggle = ref(false)
     const focusToggle = ref(false)
@@ -45,7 +51,7 @@
             if (focusToggle.value) {
                 returnRate = 0.479
             } else {
-                returnRate = 24.8
+                returnRate = 0.248
             }
         } else {
             if (focusToggle.value) {
@@ -130,12 +136,6 @@
         }
 
         return list
-    })
-
-    // Setting up list of active recipies
-    const activeRecipes = ref({
-        'T8_MEAL_STEW' : recipe.T8_MEAL_STEW,
-        'T7_MEAL_OMELETTE' : recipe.T7_MEAL_OMELETTE,
     })
 
 </script>
