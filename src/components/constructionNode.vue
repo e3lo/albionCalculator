@@ -1,7 +1,7 @@
 <template>
     <div id="construction-block">
         <h3> {{ title }} </h3>
-        <p> {{ price }}</p>
+        <p> ${{ price }}</p>
         <p> {{ quantity }}</p>
         <p> {{ updateTime }} Hrs</p>
     </div>
@@ -29,7 +29,8 @@
 
 <style>
     #construction-block {
-        background-color: black;
-        color: red;
+        background-color: beige;
+        color: black;
+        padding: 1em;
     }
 </style>

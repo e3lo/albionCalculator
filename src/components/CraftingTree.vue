@@ -4,10 +4,11 @@
             <ConstructionNode v-for="[key, value] of Object.entries(props.recipe)" :key="key" v-bind="value" :title="key"></ConstructionNode>
         </div>
         <div id="crafting-row__results">
-            Total Cost : {{ totalCost }} <br/>
-            Total Sales : {{ grossSales }} <br/>
-            Profit : {{ profit }} <br/>
-            Last Updated : {{ updateTime }} Hrs
+            <h3> {{ internalName }} </h3>
+            <p class="crafting-row__results__text">Total Cost : {{ totalCost }}</p>
+            <p class="crafting-row__results__text">Total Sales : {{ grossSales }}</p>
+            <p class="crafting-row__results__text">Profit : {{ profit }}</p>
+            <p class="crafting-row__results__text">Last Updated : {{ updateTime }} Hrs</p>
         </div>
         <div>
             <button @click="$emit('removeRecipe', props.internalName)">Remove</button>
@@ -79,11 +80,24 @@
 #crafting-row {
     display: flex;
     flex-direction: row;
+    margin: 1em;
 }
 
 #crafting-row__materials {
     display: flex;
     flex-direction: row;
+}
+
+#crafting-row__results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    padding: 2em;
+}
+
+.crafting-row__results__text {
+    margin: 2px;
 }
 
 </style>
