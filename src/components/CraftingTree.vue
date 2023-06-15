@@ -42,7 +42,7 @@
         let currentTime = new Date()
 
         let timeDifference = currentTime - updateDate // In ms
-        return Math.round((timeDifference)/(1000*3600))
+        return Math.round((timeDifference)/(1000*36000))
     })
 
     // Calculate profits
