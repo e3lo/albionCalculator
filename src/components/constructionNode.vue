@@ -1,6 +1,7 @@
 <template>
     <div id="construction-block">
         <h3> {{ title }} </h3>
+        <IconCreator :internal-name="props.title"></IconCreator>
         <p> ${{ price }}</p>
         <p> {{ quantity }}</p>
         <p> {{ updateTime }} Hrs</p>
@@ -10,6 +11,7 @@
 <script setup>
     import { computed } from '@vue/reactivity';
     import { defineProps } from 'vue';
+    import IconCreator from './IconCreator.vue';
 
     const props = defineProps({
         title: String,

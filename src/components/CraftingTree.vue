@@ -5,6 +5,7 @@
         </div>
         <div id="crafting-row__results">
             <h3> {{ internalName }} </h3>
+            <IconCreator :internal-name="props.internalName"></IconCreator>
             <p class="crafting-row__results__text">Total Cost : {{ totalCost }}</p>
             <p class="crafting-row__results__text">Total Sales : {{ grossSales }}</p>
             <p class="crafting-row__results__text">Profit : {{ profit }}</p>
@@ -20,6 +21,7 @@
     import { computed } from '@vue/reactivity';
     import ConstructionNode from './ConstructionNode.vue';
     import { defineProps } from 'vue';
+    import IconCreator from './IconCreator.vue';
 
     const props = defineProps({
         title : String,
