@@ -6,7 +6,6 @@ const T8_MEAL_STEW = reactive({
     'title' : "Beef Stew",
     'internalName' : 'T8_MEAL_STEW',
     'itemValue' : 1060,
-    'craftingCost' : 600,
     'sellPrice' : 5600,
     'time' : '',
 
@@ -33,7 +32,6 @@ const T7_MEAL_OMELETTE = reactive({
     'title' : "Pork Omelette",
     'internalName' : 'T7_MEAL_OMELETTE',
     'itemValue' : 1060,
-    'craftingCost' : 600,
     'sellPrice' : 5400,
     'time' : '',
 
@@ -60,7 +58,6 @@ const T7_MEAL_OMELETTE_1 = reactive({
     'title' : "Pork Omelette",
     'internalName' : 'T7_MEAL_OMELETTE@1',
     'itemValue' : 1060,
-    'craftingCost' : 600,
     'sellPrice' : 5400,
     'time' : '',
 
@@ -92,7 +89,6 @@ const T7_MEAL_OMELETTE_AVALON_1 = reactive({
     'title' : "Pork Omelette",
     'internalName' : 'T7_MEAL_OMELETTE_AVALON@1',
     'itemValue' : 1080,
-    'craftingCost' : 600,
     'sellPrice' : 5400,
     'time' : '',
 

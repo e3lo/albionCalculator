@@ -15,6 +15,8 @@
         <label for="premium-toggle">Premium</label>
         <input type="checkbox" id="east-server" v-model="eastServer">
         <label for="east-server">East Server</label>
+        <input type="number" id="crafting-cost" v-model="craftingCost">
+        <label for="crafting-cost">crafting cost</label>
 
         <select v-model="cityLocation">
             <option>Caerleon</option>
@@ -34,6 +36,7 @@
             :premium="premiumToggle" 
             :focus="focusToggle" 
             :resourceReturn="resourceReturn"
+            :craftingCost="craftingCost"
             @removeRecipe="removeRecipe"
         />
     </div>
@@ -60,6 +63,7 @@
     const eastServer = ref(true)
     const fetchingAPI = ref(false)
     const cityLocation = ref('')
+    const craftingCost = ref(0)
 
     // Removing active recipes
     function removeRecipe(item) {
