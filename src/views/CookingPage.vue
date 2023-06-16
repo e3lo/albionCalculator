@@ -3,10 +3,13 @@
         <h1> Cooking component</h1>
         
         <!-- Recipe Selector -->
-        <div>
-            <li v-for="items in recipe" :key="items.internalName">
-                <button @click="addRecipe(items)"> {{ items.internalName }}</button>
-            </li>
+        <div id="recipe-list__container">
+            <div id="recipe-list__item" v-for="items in recipe" :key="items.internalName">
+                <button id="recipe-list__button" @click="addRecipe(items)">
+                    <IconCreator :internalName="items.internalName"/>
+                    {{ items.title }}
+                </button>
+            </div>
         </div>
 
         <input type="checkbox" id="focus-toggle" v-model="focusToggle">
@@ -47,6 +50,7 @@
     import { computed } from '@vue/reactivity';
     import { ref } from 'vue';
     import * as recipe from '@/recipes/cookingRecipes';
+    import IconCreator from '@/components/IconCreator.vue';
 
     // Bonus City
     const bonusCity = "Caerleon"
@@ -172,3 +176,21 @@
     })
 
 </script>
+
+<style scoped>
+#recipe-list__container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#recipe-list__item{
+    padding: 0 2em 0em 2em;
+}
+
+#recipe-list__button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+</style>
