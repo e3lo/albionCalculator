@@ -4,12 +4,30 @@
             <ConstructionNode v-for="[key, value] of Object.entries(props.recipe)" :key="key" v-bind="value" :title="key"></ConstructionNode>
         </div>
         <div id="crafting-row__results">
-            <h3> {{ internalName }} </h3>
+            <h3> {{ title }} </h3>
             <IconCreator :internal-name="props.internalName"></IconCreator>
-            <p class="crafting-row__results__text">Total Cost : {{ totalCost }}</p>
-            <p class="crafting-row__results__text">Total Sales : {{ grossSales }}</p>
-            <p class="crafting-row__results__text">Profit : {{ profit }}</p>
-            <p class="crafting-row__results__text">Last Updated : {{ updateTime }} Hrs</p>
+            <table id="crafting-row__table">
+                <tr>
+                    <td><b>Profit</b></td>
+                    <td>${{ profit }}</td>
+                </tr>
+                <tr>
+                    <td><b>Focus cost</b></td>
+                    <td>111</td>
+                </tr>
+                <tr>
+                    <td><b>Last updated</b></td>
+                    <td>{{ updateTime }}Hrs</td>
+                </tr>
+                <tr>
+                    <td><b>Total sales</b></td>
+                    <td>${{ grossSales }}</td>
+                </tr>
+                <tr>
+                    <td><b>Total cost</b></td>
+                    <td>${{ totalCost }}</td>
+                </tr>
+            </table>
         </div>
         <div>
             <button @click="$emit('removeRecipe', props.internalName)">Remove</button>
@@ -95,11 +113,12 @@
     flex-direction: column;
     align-items: center;
     text-align: left;
-    padding: 2em;
+    margin-left: 1em;
+    padding: 1em;
+    background-color: azure;
 }
 
-.crafting-row__results__text {
-    margin: 2px;
+#crafting-row__table {
+    font-size: small;
 }
-
 </style>

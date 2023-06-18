@@ -185,7 +185,7 @@
 }
 
 #recipe-list__item{
-    padding: 0 2em 0em 2em;
+    padding: 0 2em 2em 2em;
 }
 
 #recipe-list__button {
