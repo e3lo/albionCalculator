@@ -2,9 +2,20 @@
     <div id="construction-block">
         <h3> {{ title }} </h3>
         <IconCreator :internal-name="props.title"></IconCreator>
-        <p> ${{ price }}</p>
-        <p> {{ quantity }}</p>
-        <p> {{ updateTime }} Hrs</p>
+        <table id="construction-block__table">
+                <tr>
+                    <td><b>Price</b></td>
+                    <td>${{ price }}</td>
+                </tr>
+                <tr>
+                    <td><b>Quantity</b></td>
+                    <td>{{ quantity }}</td>
+                </tr>
+                <tr>
+                    <td><b>Last updated</b></td>
+                    <td>{{ updateTime }}Hrs</td>
+                </tr>
+        </table>
     </div>
 </template>
 
@@ -34,5 +45,10 @@
         background-color: beige;
         color: black;
         padding: 1em;
+    }
+
+    #construction-block__table {
+        font-size: small;
+        text-align: left;
     }
 </style>
