@@ -14,6 +14,7 @@ const link  = computed(() => {
     return require(`../assets/gameIcons/${props.internalName}.png`)
 })
 
+
 </script>
 
 <style scoped>

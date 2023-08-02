@@ -1,7 +1,7 @@
 <template>
     <div id="crafting-row">
         <div id="crafting-row__materials">
-            <ConstructionNode v-for="[key, value] of Object.entries(props.recipe)" :key="key" v-bind="value" :title="key"></ConstructionNode>
+            <ConstructionNode v-for="[key, value] of Object.entries(props.recipe)" @set-price="updatePrice" :key="key" v-bind="value" :title="key"></ConstructionNode>
         </div>
         <div id="crafting-row__results">
             <h3> {{ title }} </h3>
@@ -53,6 +53,12 @@
         resourceReturn : Number,
         time : String,
     })
+
+    //Passing on price changes
+    function updatePrice(newPrice, item) {
+        console.log(newPrice)
+        console.log(item)
+    }
 
     // Time delay
     const updateTime = computed(() => {
