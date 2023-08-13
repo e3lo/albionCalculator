@@ -1,7 +1,7 @@
 <template>
     <div id="construction-block">
         <h3> {{ title }} </h3>
-        <IconCreator :internal-name="props.title"></IconCreator>
+        <IconCreator :internal-name="props.title" icon-type="gameIcons"></IconCreator>
         <table id="construction-block__table">
                 <tr>
                     <td><b>Price</b></td>

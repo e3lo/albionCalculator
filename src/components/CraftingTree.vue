@@ -5,7 +5,7 @@
         </div>
         <div id="crafting-row__results">
             <h3> {{ title }} </h3>
-            <IconCreator :internal-name="props.internalName"></IconCreator>
+            <IconCreator :internal-name="props.internalName" icon-type="gameIcons"></IconCreator>
             <table id="crafting-row__table">
                 <tr>
                     <td><b>Profit</b></td>

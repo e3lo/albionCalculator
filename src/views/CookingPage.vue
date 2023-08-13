@@ -3,15 +3,38 @@
         <h1>Step 1. Select recipes to calculate profits</h1>
         
         <!-- Recipe Selector -->
-        <div id="recipe-list__container">
-            <div id="recipe-list__item" v-for="items in recipeFamily('OMELETTE')" :key="items.internalName">
-                <button id="recipe-list__button" @click="addRecipe(items)">
-                    <IconCreator :internalName="items.internalName"/>
-                    {{ items.title }}
-                </button>
+        <div id="recipe-selector">
+            <div class="recipe-list__container">
+                <div class="recipe-list__header">
+                    <IconCreator internal-name="T7_MEAL_OMELETTE" icon-type="gameIcons"></IconCreator>
+                    <h3>Omelette</h3>
+                    <IconCreator internal-name="expand_down" icon-type="icons" class="recipe-list__icon"></IconCreator>
+                </div>
+                <div class="recipe-list__item" id="omeletteRecipes" v-for="items in recipeFamily('OMELETTE')" :key="items.internalName">
+                    <button class="recipe-list__button" @click="addRecipe(items)">
+                        <IconCreator :internalName="items.internalName" icon-type="gameIcons"/>
+                        {{ items.title }}
+                    </button>
+                </div>
+            </div>
+
+            <div class="recipe-list__container">
+                <div class="recipe-list__header">
+                    <IconCreator internal-name="T8_MEAL_STEW" icon-type="gameIcons"></IconCreator>
+                    <h3>Stew</h3>
+                    <IconCreator internal-name="expand_down" icon-type="icons" class="recipe-list__icon"></IconCreator>
+                </div>
+                <div class="recipe-list__item" id="stewRecipes" v-for="items in recipeFamily('STEW')" :key="items.internalName">
+                    <button class="recipe-list__button" @click="addRecipe(items)">
+                        <IconCreator :internalName="items.internalName" icon-type="gameIcons"/>
+                        {{ items.title }}
+                    </button>
+                </div>
             </div>
         </div>
 
+
+        <!-- Other info selections -->
         <input type="checkbox" id="focus-toggle" v-model="focusToggle">
         <label for="focus-toggle">Focus</label>
         <input type="checkbox" id="premium-toggle" v-model="premiumToggle">
@@ -32,6 +55,8 @@
 
         <button @click="refreshValues()" :disabled="fetchingAPI" >Refresh values</button>
     </div>
+
+    <!-- Crafting calculator -->
     <div>
         <CraftingTree v-for="[key, value] of Object.entries(activeRecipes)" 
             :key="key" 
@@ -184,17 +209,37 @@
 </script>
 
 <style scoped>
-#recipe-list__container{
+
+#recipe-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 800px;
+    margin: auto;
+    gap: 1rem 1rem;
+}
+.recipe-list__container{
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 1.25rem;
+    border: 2px solid rgba(255, 255, 255, 0.40);
+    padding: 1rem;
+}
+
+.recipe-list__header {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
-#recipe-list__item{
+.recipe-list__icon {
+    width: 2em;
+    margin-left: auto;
+}
+
+.recipe-list__item{
     padding: 0 2em 2em 2em;
+    display: block;
 }
 
-#recipe-list__button {
+.recipe-list__button {
     display: flex;
     flex-direction: column;
     align-items: center;

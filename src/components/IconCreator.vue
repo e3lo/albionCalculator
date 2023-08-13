@@ -1,24 +1,32 @@
 <template>
-    <img :src="link" id="icon">
+    <img :src="link" class="largeIcon">
 </template>
 
 <script setup>
 import { computed } from '@vue/reactivity';
-import { defineProps} from 'vue';
+import { defineProps } from 'vue';
 
 const props = defineProps ({
-    internalName : String
+    internalName : String,
+    iconType : String,
 })
 
 const link  = computed(() => {
-    return require(`../assets/gameIcons/${props.internalName}.png`)
+    try {
+        return require(`../assets/${props.iconType}/${props.internalName}.svg`)
+    } catch {
+        return require(`../assets/${props.iconType}/${props.internalName}.png`)
+    }    
 })
-
 
 </script>
 
 <style scoped>
-    #icon {
-        width : 4em
+    .largeIcon {
+        width : 4em;
+    }
+
+    .smallIcon {
+        width : 2em;
     }
 </style>
