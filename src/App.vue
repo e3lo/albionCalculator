@@ -37,10 +37,12 @@ body {
   background-color: #141317;
 }
 
-.nav {
+#nav {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
+  margin: auto;
+  max-width: 50rem;
 }
 
 .nav__button {
