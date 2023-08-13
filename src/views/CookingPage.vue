@@ -1,10 +1,10 @@
 <template>
     <div>
-        <h1> Cooking component</h1>
+        <h1>Step 1. Select recipes to calculate profits</h1>
         
         <!-- Recipe Selector -->
         <div id="recipe-list__container">
-            <div id="recipe-list__item" v-for="items in recipe" :key="items.internalName">
+            <div id="recipe-list__item" v-for="items in recipeFamily('OMELETTE')" :key="items.internalName">
                 <button id="recipe-list__button" @click="addRecipe(items)">
                     <IconCreator :internalName="items.internalName"/>
                     {{ items.title }}
@@ -68,6 +68,11 @@
     const fetchingAPI = ref(false)
     const cityLocation = ref('')
     const craftingCost = ref(0)
+
+    // Sorting recipes into categories
+    function recipeFamily(type) {
+        return recipe.COOKING_TREE[type]
+    }
 
     // Removing active recipes
     function removeRecipe(item) {
@@ -151,7 +156,7 @@
         }
     }
 
-    // Creating list of items to be requested in API
+    // Creating list of items to be requested in API to be bought (materials)
     const buyingList = computed(() => {
         let list = []
 
@@ -166,6 +171,7 @@
         return uniqueList
     })
 
+    // Creates list of items to be sold for API (final products)
     const sellingList = computed(() => {
         let list = []
         for (let items in activeRecipes.value) {
