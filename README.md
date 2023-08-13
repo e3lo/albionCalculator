@@ -10,7 +10,7 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compiles and minifies for production DO NOT USE THIS use gh-pages instead
 ```
 npm run build
 ```
@@ -18,6 +18,11 @@ npm run build
 ### Lints and fixes files
 ```
 npm run lint
+```
+
+### Compiles and sends to production brancH
+```
+npm run gh-pages-deploy
 ```
 
 ### Customize configuration

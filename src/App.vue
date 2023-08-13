@@ -1,16 +1,25 @@
 <template>
   <div id="nav">
-    <router-link to="/" class="nav__button"> Home </router-link>
-    <router-link to="/cooking" class="nav__button"> Cooking </router-link>
-    <router-link to="/refining" class="nav__button"> Refining </router-link>
-    <router-link to="/brewing" class="nav__button"> Brewing </router-link>
+    <router-link to="/" class="nav__button" :class="getActiveClass('/')" > Home </router-link>
+    <router-link to="/cooking" class="nav__button" :class="getActiveClass('/cooking')"> Cooking </router-link>
+    <router-link to="/refining" class="nav__button" :class="getActiveClass('/refining')"> Refining </router-link>
+    <router-link to="/brewing" class="nav__button" :class="getActiveClass('/brewing')"> Brewing </router-link>
   </div>
   <router-view />
 </template>
 
-<script>
-export default {
-  name: 'App',
+<script setup>
+import { useRoute } from 'vue-router';
+
+// Component name is defined as a comment
+// name: 'App',
+
+const route = useRoute()
+
+function getActiveClass(path) {
+  return {
+    active : route.path === path
+  }
 }
 </script>
 
@@ -46,5 +55,15 @@ body {
 
 .nav__button:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.active {
+  border: 2px solid #FF595E;;
+  background: rgba(255, 89, 94, 0.10);
+}
+
+.active:hover {
+  border: 2px solid #FF595E;;
+  background: rgba(255, 89, 94, 0.20);
 }
 </style>
