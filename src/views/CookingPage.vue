@@ -3,14 +3,15 @@
         <h1>Step 1. Select recipes to calculate profits</h1>
         
         <!-- Recipe Selector -->
+        <!-- CHANGE TO COMPONENTS IN FUTURE -->
         <div id="recipe-selector">
             <div class="recipe-list__container">
-                <div class="recipe-list__header">
+                <div class="recipe-list__header" @click="changeDropdownState('OMELETTE')">
                     <IconCreator internal-name="T7_MEAL_OMELETTE" icon-type="gameIcons"></IconCreator>
                     <h3>Omelette</h3>
                     <IconCreator internal-name="expand_down" icon-type="icons" class="recipe-list__icon"></IconCreator>
                 </div>
-                <div class="recipe-list__item" id="omeletteRecipes" v-for="items in recipeFamily('OMELETTE')" :key="items.internalName">
+                <div class="recipe-list__item" v-show="dropdownState['OMELETTE']"  id="omeletteRecipes" v-for="items in recipeFamily('OMELETTE')" :key="items.internalName">
                     <button class="recipe-list__button" @click="addRecipe(items)">
                         <IconCreator :internalName="items.internalName" icon-type="gameIcons"/>
                         {{ items.title }}
@@ -19,12 +20,12 @@
             </div>
 
             <div class="recipe-list__container">
-                <div class="recipe-list__header">
+                <div class="recipe-list__header" @click="changeDropdownState('STEW')">
                     <IconCreator internal-name="T8_MEAL_STEW" icon-type="gameIcons"></IconCreator>
                     <h3>Stew</h3>
                     <IconCreator internal-name="expand_down" icon-type="icons" class="recipe-list__icon"></IconCreator>
                 </div>
-                <div class="recipe-list__item" id="stewRecipes" v-for="items in recipeFamily('STEW')" :key="items.internalName">
+                <div class="recipe-list__item" id="stewRecipes" v-show="dropdownState['STEW']" v-for="items in recipeFamily('STEW')" :key="items.internalName">
                     <button class="recipe-list__button" @click="addRecipe(items)">
                         <IconCreator :internalName="items.internalName" icon-type="gameIcons"/>
                         {{ items.title }}
@@ -97,6 +98,16 @@
     // Sorting recipes into categories
     function recipeFamily(type) {
         return recipe.COOKING_TREE[type]
+    }
+
+    // Setting dropdown state
+    const dropdownState = ref({
+        'OMELETTE' : false,
+        'STEW' : false,
+    })
+
+    function changeDropdownState(event) {
+        dropdownState.value[event] = !dropdownState.value[event]
     }
 
     // Removing active recipes
@@ -222,6 +233,7 @@
     border-radius: 1.25rem;
     border: 2px solid rgba(255, 255, 255, 0.40);
     padding: 1rem;
+    height: min-content;
 }
 
 .recipe-list__header {
