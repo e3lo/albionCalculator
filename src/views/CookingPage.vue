@@ -5,33 +5,8 @@
         <!-- Recipe Selector -->
         <!-- CHANGE TO COMPONENTS IN FUTURE -->
         <div id="recipe-selector">
-            <div class="recipe-list__container">
-                <div class="recipe-list__header" @click="changeDropdownState('OMELETTE')">
-                    <IconCreator internal-name="T7_MEAL_OMELETTE" icon-type="gameIcons"></IconCreator>
-                    <h3>Omelette</h3>
-                    <IconCreator internal-name="expand_down" icon-type="icons" class="recipe-list__icon"></IconCreator>
-                </div>
-                <div class="recipe-list__item" v-show="dropdownState['OMELETTE']"  id="omeletteRecipes" v-for="items in recipeFamily('OMELETTE')" :key="items.internalName">
-                    <button class="recipe-list__button" @click="addRecipe(items)">
-                        <IconCreator :internalName="items.internalName" icon-type="gameIcons"/>
-                        {{ items.title }}
-                    </button>
-                </div>
-            </div>
-
-            <div class="recipe-list__container">
-                <div class="recipe-list__header" @click="changeDropdownState('STEW')">
-                    <IconCreator internal-name="T8_MEAL_STEW" icon-type="gameIcons"></IconCreator>
-                    <h3>Stew</h3>
-                    <IconCreator internal-name="expand_down" icon-type="icons" class="recipe-list__icon"></IconCreator>
-                </div>
-                <div class="recipe-list__item" id="stewRecipes" v-show="dropdownState['STEW']" v-for="items in recipeFamily('STEW')" :key="items.internalName">
-                    <button class="recipe-list__button" @click="addRecipe(items)">
-                        <IconCreator :internalName="items.internalName" icon-type="gameIcons"/>
-                        {{ items.title }}
-                    </button>
-                </div>
-            </div>
+            <SelectionTree type="OMELETTE" iconName="T7_MEAL_OMELETTE" @add-recipe="addRecipe"/>
+            <SelectionTree type="STEW" iconName="T8_MEAL_STEW" @add-recipe="addRecipe"/>
         </div>
 
 
@@ -76,7 +51,7 @@
     import { computed } from '@vue/reactivity';
     import { ref } from 'vue';
     import * as recipe from '@/recipes/cookingRecipes';
-    import IconCreator from '@/components/IconCreator.vue';
+    import SelectionTree from '@/components/SelectionTree.vue';
 
     // Bonus City
     const bonusCity = "Caerleon"
@@ -94,21 +69,6 @@
     const fetchingAPI = ref(false)
     const cityLocation = ref('')
     const craftingCost = ref(0)
-
-    // Sorting recipes into categories
-    function recipeFamily(type) {
-        return recipe.COOKING_TREE[type]
-    }
-
-    // Setting dropdown state
-    const dropdownState = ref({
-        'OMELETTE' : false,
-        'STEW' : false,
-    })
-
-    function changeDropdownState(event) {
-        dropdownState.value[event] = !dropdownState.value[event]
-    }
 
     // Removing active recipes
     function removeRecipe(item) {
