@@ -1,9 +1,8 @@
 <template>
     <div>
-        <h1>Step 1. Select recipes to calculate profits</h1>
+        <h1>Step 1 Select recipes to calculate profits</h1>
         
         <!-- Recipe Selector -->
-        <!-- CHANGE TO COMPONENTS IN FUTURE -->
         <div id="recipe-selector">
             <SelectionTree type="OMELETTE" iconName="T7_MEAL_OMELETTE" @add-recipe="addRecipe"/>
             <SelectionTree type="STEW" iconName="T8_MEAL_STEW" @add-recipe="addRecipe"/>
@@ -11,6 +10,7 @@
 
 
         <!-- Other info selections -->
+        <h1>Step 2 Fine tune the settings</h1>
         <input type="checkbox" id="focus-toggle" v-model="focusToggle">
         <label for="focus-toggle">Focus</label>
         <input type="checkbox" id="premium-toggle" v-model="premiumToggle">
@@ -28,6 +28,9 @@
             <option>Lymhurst</option>
             <option>Bridgewatch</option>
         </select>
+
+        <!-- Calculate profits button -->
+        <h1>Step 3 Calculate profits</h1>
 
         <button @click="refreshValues()" :disabled="fetchingAPI" >Refresh values</button>
     </div>
@@ -180,6 +183,9 @@
 </script>
 
 <style scoped>
+h1 {
+    margin-top: 2em;
+}
 
 #recipe-selector {
     display: grid;
@@ -187,6 +193,7 @@
     max-width: 800px;
     margin: auto;
     gap: 1rem 1rem;
+    margin-bottom: 1em;
 }
 .recipe-list__container{
     background-color: rgba(255, 255, 255, 0.05);
