@@ -6,19 +6,35 @@
         </h3>
 
         <div class="stats">
-            <div class="pill"><b>Tier 5</b></div>
-            <div class="pill"><b>Enchant 6</b></div>
+            <div class="pill"><b>{{ tier }}</b></div>
+            <div class="pill"><b>Enchant {{ enchant }}</b></div>
         </div>
     </div>
 </template>
 
 <script setup>
-    import { defineProps } from 'vue';
+    import { computed, defineProps } from 'vue';
     import IconCreator from '@/components/IconCreator.vue';
 
-    defineProps({
+    const props = defineProps({
         title : String,
         internalName : String,
+    })
+
+    const tier = computed(() => {
+        let data = props.internalName.split("_")
+        return data[0]
+    })
+
+    const enchant = computed(() => {
+        if (props.internalName.includes('@')) {
+            let data = props.internalName.split("@")
+            return data[1]
+        } else {
+            return 0
+        }
+        
+        
     })
 
     function clicked() {
