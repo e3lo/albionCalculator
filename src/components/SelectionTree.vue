@@ -7,8 +7,7 @@
         </div>
         <div class="recipe-list__item" v-show="dropdownState" id="recipes" v-for="items in recipeFamily(type)" :key="items.internalName">
             <button class="recipe-list__button" @click="$emit('addRecipe', items)">
-                <IconCreator :internalName="items.internalName" icon-type="gameIcons"/>
-                {{ items.title }}
+                <ItemTreeSelector :title="items.title" :internal-name="items.internalName"></ItemTreeSelector>
             </button>
         </div>
     </div>
@@ -19,6 +18,7 @@
 
     import { defineProps, ref } from 'vue';
     import IconCreator from '@/components/IconCreator.vue';
+    import ItemTreeSelector from './ItemTreeSelector.vue';
     import * as recipe from '@/recipes/cookingRecipes';
 
     defineProps({
@@ -58,13 +58,19 @@
 }
 
 .recipe-list__item{
-    padding: 0 2em 2em 2em;
+    padding-top: 1em;
     display: block;
 }
 
 .recipe-list__button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    width: 100%;
+    padding: 1em 0.5em 1em 0.5em;
+}
+
+.recipe-list__button:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 </style>
